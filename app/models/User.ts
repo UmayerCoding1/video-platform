@@ -25,12 +25,12 @@ const userSchema = new Schema<IUser>(
 );
 
 userSchema.pre("save", async function (next) {
-  if (this.isModified(this.password)) {
+  if (this.isModified("password")) {
     this.password = await bcrypt.hash(this.password, 10);
   }
-
   next();
 });
 
 
-export const User = models?.User || model<IUser>('Users', userSchema);
+
+export const User = models?.User || model<IUser>('User', userSchema);
